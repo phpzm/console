@@ -29,7 +29,6 @@
   },
   "autoload": {
     "psr-4": {
-      "Simples\\Console\\Kernel\\": "src/Kernel/",
       "Simples\\Console\\": "src/"
     }
   }
