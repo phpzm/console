@@ -21,22 +21,21 @@ abstract class GeneratorService extends Service
     protected static $layer = '';
 
     /**
-     * @param App $app
      * @param array $parameters
      * @SuppressWarnings("unused")
      */
-    public static function execute(App $app, array $parameters = [])
+    public static function execute(array $parameters = [])
     {
         $option = '';
         do {
             switch ($option) {
                 case 'create': {
-                    $commands = self::create($app);
+                    $commands = self::create();
 
                     $replacements = [
                         'namespace' => [
                             'field' => '${NAMESPACE}',
-                            'value' => $app::config('app.namespace') . $commands['namespace']
+                            'value' => App::config('app.namespace') . $commands['namespace']
                         ],
                         'name' => [
                             'field' => '${NAME}',
@@ -62,10 +61,9 @@ abstract class GeneratorService extends Service
     }
 
     /**
-     * @param App $app
      * @return array|null
      */
-    protected static function create(App $app)
+    protected static function create()
     {
         $control = 'action';
         $option = '';
@@ -75,7 +73,7 @@ abstract class GeneratorService extends Service
             switch ($control) {
                 case 'action': {
                     $commands['action'] = $option;
-                    $message = ' namespace: $ [' . $app::config('app.namespace') . ']';
+                    $message = ' namespace: $ [' . App::config('app.namespace') . ']';
                     $control = 'namespace';
                     break;
                 }

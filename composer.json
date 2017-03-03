@@ -25,11 +25,11 @@
   "require": {
     "php": ">=7.0",
     "phpzm/helper": "dev-master",
-    "phpzm/kernel": "dev-master",
-    "phpzm/route": "dev-master"
+    "phpzm/kernel": "dev-master"
   },
   "autoload": {
     "psr-4": {
+      "Simples\\Console\\Kernel\\": "src/Kernel/",
       "Simples\\Console\\": "src/"
     }
   }

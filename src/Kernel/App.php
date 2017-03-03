@@ -1,6 +1,9 @@
 <?php
 
-namespace Simples\Console;
+namespace Simples\Console\Kernel;
+
+use Simples\Console\HelpService;
+use Simples\Console\Service;
 
 /**
  * Class Console
@@ -23,29 +26,28 @@ class App
      */
     protected static function boot()
     {
-        static::register('route', function ($app, $parameters) {
-            RouteService::execute($app, $parameters);
-        });
-        static::register('model', function ($app, $parameters) {
-            ModelService::execute($app, $parameters);
-        });
-        static::register('controller', function ($app, $parameters) {
-            ControllerService::execute($app, $parameters);
-        });
-        static::register('repository', function ($app, $parameters) {
-            RepositoryService::execute($app, $parameters);
-        });
-        static::register('help', function ($app, $parameters) {
-            HelpService::execute($app, $parameters);
+//        static::register('route', function ($app, $parameters) {
+//            RouteService::execute($app, $parameters);
+//        });
+//        static::register('model', function ($app, $parameters) {
+//            ModelService::execute($app, $parameters);
+//        });
+//        static::register('controller', function ($app, $parameters) {
+//            ControllerService::execute($app, $parameters);
+//        });
+//        static::register('repository', function ($app, $parameters) {
+//            RepositoryService::execute($app, $parameters);
+//        });
+        static::register('help', function ($parameters) {
+            HelpService::execute($parameters);
         });
         static::otherWise('help');
     }
 
     /**
-     * @param App $app
      * @param array $parameters
      */
-    public static function handler(App $app, array $parameters)
+    public static function handler(array $parameters)
     {
         static::boot();
 
@@ -55,7 +57,7 @@ class App
         $service = off($parameters, 0, static::$otherWise);
         array_shift($parameters);
         do {
-            static::execute($app, $service, $parameters);
+            static::execute($service, $parameters);
             $service = read();
         } while (!in_array($service, Service::KILLERS));
     }
@@ -70,14 +72,13 @@ class App
     }
 
     /**
-     * @param App $app
      * @param string $service
      * @param array $parameters
      */
-    private static function execute(App $app, string $service, array $parameters)
+    private static function execute(string $service, array $parameters)
     {
         if (isset(static::$services[$service])) {
-            call_user_func_array(static::$services[$service], [$app, $parameters]);
+            call_user_func_array(static::$services[$service], [$parameters]);
         }
     }
 

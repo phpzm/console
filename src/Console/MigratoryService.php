@@ -2,7 +2,6 @@
 
 namespace Simples\Console;
 
-use Simples\Kernel\App;
 use ReflectionClass;
 use ReflectionMethod;
 
@@ -13,11 +12,10 @@ use ReflectionMethod;
 class MigratoryService extends Service
 {
     /**
-     * @param App $app
      * @param array $parameters
      * @SuppressWarnings("unused")
      */
-    public static function execute(App $app, array $parameters = [])
+    public static function execute(array $parameters = [])
     {
         // TODO: Implement execute() method.
     }

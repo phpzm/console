@@ -3,9 +3,9 @@
 namespace Simples\Console;
 
 use Simples\Helper\Directory;
+use Simples\Helper\File;
 use Simples\Helper\Text;
 use Simples\Kernel\App;
-use Simples\Helper\File;
 
 /**
  * Class FileManager
