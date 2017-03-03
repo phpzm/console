@@ -1,0 +1,36 @@
+{
+  "name": "phpzm/console",
+  "description": "Simples Console package",
+  "minimum-stability": "dev",
+  "keywords": [
+    "php",
+    "framework",
+    "api",
+    "simples"
+  ],
+  "homepage": "https://github.com/phpzm/console",
+  "license": "MIT",
+  "version": "1.0.0",
+  "type": "package",
+  "authors": [
+    {
+      "name": "William",
+      "email": "wilcorrea@gmail.com"
+    },
+    {
+      "name": "Ezio",
+      "email": "ezioadsr@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=7.0",
+    "phpzm/helper": "dev-master",
+    "phpzm/kernel": "dev-master",
+    "phpzm/route": "dev-master"
+  },
+  "autoload": {
+    "psr-4": {
+      "Simples\\Console\\": "src/"
+    }
+  }
+}
