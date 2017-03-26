@@ -2,8 +2,12 @@
 
 namespace Simples\Console\Kernel;
 
+use Simples\Console\ControllerService;
 use Simples\Console\HelpService;
+use Simples\Console\ModelService;
+use Simples\Console\RepositoryService;
 use Simples\Console\Service;
+use Simples\Route\Console\RouteService;
 
 /**
  * Class Console
@@ -26,18 +30,18 @@ class App
      */
     protected static function boot()
     {
-//        static::register('route', function ($app, $parameters) {
-//            RouteService::execute($app, $parameters);
-//        });
-//        static::register('model', function ($app, $parameters) {
-//            ModelService::execute($app, $parameters);
-//        });
-//        static::register('controller', function ($app, $parameters) {
-//            ControllerService::execute($app, $parameters);
-//        });
-//        static::register('repository', function ($app, $parameters) {
-//            RepositoryService::execute($app, $parameters);
-//        });
+        static::register('route', function ($parameters) {
+            RouteService::execute($parameters);
+        });
+        static::register('model', function ($parameters) {
+            ModelService::execute($parameters);
+        });
+        static::register('controller', function ($parameters) {
+            ControllerService::execute($parameters);
+        });
+        static::register('repository', function ($parameters) {
+            RepositoryService::execute($parameters);
+        });
         static::register('help', function ($parameters) {
             HelpService::execute($parameters);
         });
