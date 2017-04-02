@@ -29,7 +29,7 @@ abstract class GeneratorService extends Service
         $option = '';
         do {
             switch ($option) {
-                case 'create': {
+                case 'create':
                     $commands = self::create();
 
                     $replacements = [
@@ -48,7 +48,6 @@ abstract class GeneratorService extends Service
 
                     static::others($fileManager);
                     break;
-                }
             }
             echo " # MODEL\n";
             echo " Choose one option:\n";
@@ -71,23 +70,20 @@ abstract class GeneratorService extends Service
         $commands = [];
         do {
             switch ($control) {
-                case 'action': {
+                case 'action':
                     $commands['action'] = $option;
                     $message = ' namespace: $ [' . App::config('app.namespace') . ']';
                     $control = 'namespace';
                     break;
-                }
-                case 'namespace': {
+                case 'namespace':
                     $commands['namespace'] = $option;
                     $message = ' name: $ ';
                     $control = 'name';
                     break;
-                }
-                case 'name': {
+                case 'name':
                     $commands['name'] = $option;
                     return $commands;
                     break;
-                }
             }
             $option = read("[ model.create ]{$message}");
         } while (!in_array($option, Service::KILLERS));
