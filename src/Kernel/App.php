@@ -51,7 +51,7 @@ class App
     /**
      * @param array $parameters
      */
-    public static function handler(array $parameters)
+    public static function handle(array $parameters)
     {
         static::boot();
 
