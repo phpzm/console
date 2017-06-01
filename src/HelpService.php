@@ -12,7 +12,7 @@ abstract class HelpService extends Service
      * @param array $parameters
      * @SuppressWarnings("unused")
      */
-    public static function execute(array $parameters = [])
+    public static function execute(array &$parameters = [])
     {
         echo " # HELP\n";
         echo " Choose one option:\n";

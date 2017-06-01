@@ -24,13 +24,13 @@ abstract class GeneratorService extends Service
      * @param array $parameters
      * @SuppressWarnings("unused")
      */
-    public static function execute(array $parameters = [])
+    public static function execute(array &$parameters = [])
     {
-        $option = '';
+        $option = (empty($parameters)) ? '' : array_shift($parameters);
         do {
             switch ($option) {
                 case 'create':
-                    $commands = self::create();
+                    $commands = self::create($parameters);
 
                     $replacements = [
                         'namespace' => [
@@ -46,32 +46,34 @@ abstract class GeneratorService extends Service
 
                     $fileManager->execute(static::$layer);
 
-                    static::others($fileManager);
+                    static::others($fileManager, $parameters);
                     break;
             }
+
+
             echo " # MODEL\n";
             echo " Choose one option:\n";
             echo "    - create\n";
             // echo "    - refactor\n";
             // echo "    - remove\n";
 
-            $option = read('[ model ]$ ');
+            $option = empty($parameters) ? read('[ ' . static::$layer . ' ]$ ') : array_shift($parameters);
         } while (!in_array($option, Service::KILLERS));
     }
 
     /**
      * @return array|null
      */
-    protected static function create()
+    protected static function create(array &$parameters)
     {
         $control = 'action';
-        $option = '';
+        $option = empty($parameters) ? '' : array_shift($parameters);
         $message = '';
         $commands = [];
         do {
             switch ($control) {
                 case 'action':
-                    $commands['action'] = $option;
+                    $commands['action'] = '';
                     $message = ' namespace: $ [' . App::config('app.namespace') . ']';
                     $control = 'namespace';
                     break;
@@ -79,13 +81,17 @@ abstract class GeneratorService extends Service
                     $commands['namespace'] = $option;
                     $message = ' name: $ ';
                     $control = 'name';
+                    $option = '';
                     break;
                 case 'name':
                     $commands['name'] = $option;
+                    $option = '';
                     return $commands;
                     break;
             }
-            $option = read("[ model.create ]{$message}");
+            if(empty($option)){
+                $option = empty($parameters) ? read("[ " . static::$layer .  ".create ]{$message}") : array_shift($parameters);
+            }
         } while (!in_array($option, Service::KILLERS));
 
         return null;
@@ -96,5 +102,5 @@ abstract class GeneratorService extends Service
      * @param FileManager $fileManager
      * @throws \Exception
      */
-    abstract protected static function others(FileManager $fileManager);
+    abstract protected static function others(FileManager $fileManager, array &$parameters);
 }

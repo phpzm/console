@@ -16,5 +16,5 @@ abstract class Service
     /**
      * @param array $parameters
      */
-    abstract public static function execute(array $parameters = []);
+    abstract public static function execute(array &$parameters = []);
 }

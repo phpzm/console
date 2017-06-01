@@ -58,11 +58,12 @@ class App
         echo "@start/\n";
         echo "Press ^C or type 'exit' at any time to quit.\n";
 
-        $service = off($parameters, 0, static::$otherWise);
+        $service = off(array_values($parameters), 0, static::$otherWise);
         array_shift($parameters);
+
         do {
             static::execute($service, $parameters);
-            $service = read();
+            $service = empty($parameters) ? read() : array_shift($parameters);
         } while (!in_array($service, Service::KILLERS));
     }
 
@@ -79,7 +80,7 @@ class App
      * @param string $service
      * @param array $parameters
      */
-    private static function execute(string $service, array $parameters)
+    private static function execute(string $service, array &$parameters)
     {
         if (isset(static::$services[$service])) {
             call_user_func_array(static::$services[$service], [$parameters]);
