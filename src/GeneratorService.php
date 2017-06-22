@@ -62,6 +62,7 @@ abstract class GeneratorService extends Service
     }
 
     /**
+     * @param array $parameters
      * @return array|null
      */
     protected static function create(array &$parameters)
@@ -95,6 +96,17 @@ abstract class GeneratorService extends Service
         } while (!in_array($option, Service::KILLERS));
 
         return null;
+    }
+
+    /**
+     * @param $parameters
+     * @param string $prompt
+     * @param string $options
+     * @return mixed|string
+     */
+    protected static function explain($parameters, string $prompt, string $options = '')
+    {
+        return empty($parameters) ? read($prompt, $options) : array_shift($parameters);
     }
 
     /**
