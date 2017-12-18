@@ -10,7 +10,7 @@
   ],
   "homepage": "https://github.com/phpzm/console",
   "license": "MIT",
-  "version": "1.6.16",
+  "version": "1.6.17",
   "type": "package",
   "authors": [
     {
@@ -24,8 +24,8 @@
   ],
   "require": {
     "php": ">=7.0",
-    "phpzm/helper": "^1.6.14",
-    "phpzm/kernel": "^1.11.8"
+    "phpzm/helper": "^1.6.16",
+    "phpzm/kernel": "^1.11.9"
   },
   "autoload": {
     "psr-4": {
